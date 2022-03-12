@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monza Motorsports</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link href="style.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/png" href="./img/favicon.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <section class="preview">
+        <div class="container">
+            <header>
+                <img src="./img/logo.png" />
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Inventory</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Financing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><img src="./img/facebook.png" /></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><img src="./img/instagram.png" /></a>
+                    </li>
+                </ul>
+            </header>
+            <h1>The right way to get a car</h1>
+            <div class="preview-text">
+                <span>
+            Monza Motorsports is a boutique-style dealership specializing in
+            premium imports. We offer an advanced online vehicle purchasing
+            experience with integrated financing and contactless home delivery.
+          </span>
+                <span>
+            All of our cars come with a 5 day/500 kilometres no-hassle exchange
+            option. Since 2012 Monza Motorsports has been the benchmark for
+            innovation in the automotive industry.
+          </span>
+            </div>
+            <button type="button" class="btn btn-outline-secondary">
+          Browse cars
+        </button>
+        </div>
+    </section>
+    <section class="offers">
+        <div class="container">
+            <div class="offers-title">
+                <h2>current offers</h2>
+            </div>
+            <div class="offers-filter">
+                <select name="offers-filter-year" onchange="filterArrayForValue(this.name, this.value)">
+            <option value="">Year</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2019">2019</option>
+          </select>
+                <select name="offers-filter-make" onchange="filterArrayForValue(this.name, this.value)">
+            <option value="">Make</option>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Lexus">Lexus</option>
+            <option value="Mercedes-Benz">Mercedes-Benz</option>
+            <option value="Hyundai">Hyundai</option>
+          </select>
+                <select name="offers-filter-model" onchange="filterArrayForValue(this.name, this.value)">
+            <option value="">Model</option>
+            <option value="Tiguan">Tiguan</option>
+            <option value="Highlander">Highlander</option>
+            <option value="RX">RX</option>
+            <option value="Elantra">Elantra</option>
+            <option value="GLE">GLE</option>
+            <option value="Venza">Venza</option>
+          </select>
+                <select name="offers-filter-trim" onchange="filterArrayForValue(this.name, this.value)">
+            <option value="">Trim</option>
+            <option value="Gas">Gas</option>
+            <option value="Diesel">Diesel</option>
+          </select>
+                <select name="offers-filter-mileage" onchange="filterArrayForValue(this.name, this.value)">
+            <option value="">Mileage</option>
+            <option value="0-20000">0-20000</option>
+            <option value="20000-40000">20000-40000</option>
+            <option value="40000-60000">40000-60000</option>
+            <option value="60000-80000">60000-80000</option>
+            <option value="80000-100000">80000-100000</option>
+            <option value="100000-120000">100000-120000</option>
+          </select>
+                <button onclick="showAllCars(true)">
+                  40 cars
+                </button>
+            </div>
+            <div class="offers-sub-filters">
+                <div class="offers-sub-filters-instant">
+                    <label class="container-checkbox">
+                        <input type="checkbox" onchange="showCarsInAvailable(this.checked)">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="offers-sub-filters-available">Instantly available vehicles</label>
+                </div>
+                <div class="offers-sub-filters-sorted">
+                    <label class="offers-sub-filters-sort-text">Sort by</label>
+                    <img src="./img/group_arrow_up.png" id="sort-img" onclick="reverseList(this.src)" />
+                    <select name="offers-sub-filters-sorted-option" onchange="filterArrayForValue(this.name, this.value)">
+                        <option value="">Publication date (ascending)</option>
+                        <option value="descendingDate">Publication date (descending)</option>
+                        <option value="ascendingPrice">Price (ascending)</option>
+                        <option value="descendingPrice">Price (descending)</option>
+                        <option value="ascendingMileage">Mileage (ascending)</option>
+                        <option value="descendingMileage">Mileage (descending)</option>
+                        <option value="ascendingPerformance">Performance (ascending)</option>
+                        <option value="descendingPerformance">Performance (descending)</option>
+                      </select>
+                </div>
+            </div>
+            <div class="offers-cards">
+                <div id="cards"></div>
+            </div>
+        </div>
+    </section>
+    <section class="subscribe">
+        <div class="subscribe-block container">
+            <div class="subscribe-block-text">
+                <h4>Haven't found a suitable vehicle?</h4>
+                <div>
+                    <span>Sign up for our newsletter and be the first to know when we
+              publish new vehicle offers.</span
+            >
+          </div>
+        </div>
+        <div class="subscribe-block-form">
+          <input placeholder="Enter your email" />
+          <button type="button" class="btn btn-outline-secondary">
+            Subscribe now
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="popular-questions">
+        <div class="popular-questions-title">
+            <h2>popular questions</h2>
+        </div>
+        <div class="popular-questions-accordion">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  1. Scope
+                </button>
+                        </h2>
+                        <div class="plus"></div>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">Some text in Scope.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  2. Vehicle characteristics
+                </button>
+                        </h2>
+                        <div class="plus"></div>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">Some text in Vehicle characteristics.</div>
+                    </div>
+                </div>
+                <div class="card open-issue">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  3. Warranty / guarantee
+                </button>
+                        </h2>
+                        <div class="plus"></div>
+                    </div>
+                    <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>
+                                3.1 The statutory warranty is completely excluded to the extent permitted by law.
+                            </p>
+                            <p>
+                                3.2 If the vehicle still has a current factory warranty, a sales representative (brand representative) of the manufacturer shall provide the services owed therein. If there is a factory warranty, the beginning of the warranty for new vehicles or vehicles
+                                with a current manufacturer's warranty is not the date of the first placing on the market, but the beginning of the warranty in the manufacturer's system or the contractually agreed beginning of the warranty, if any.
+                            </p>
+                            <p>
+                                3.3 If there is a special warranty insurance for the vehicle, this will take the place of the material warranty according to section 3.1 and replace it. In this case, the General Terms and Conditions of the respective warranty service provider apply.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  4. Trade-in vehicle
+                </button>
+                        </h2>
+                        <div class="plus"></div>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">Some text in Trade-in vehicle.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  5. Home Delivery
+                </button>
+                        </h2>
+                        <div class="plus"></div>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">Some text in Home Delivery.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  6. Right of return
+                </button>
+                        </h2>
+                        <div class="plus"></div>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">Some text in Right of return.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  7. Written form
+                </button>
+                        </h2>
+                        <div class="plus"></div>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">Some text in Written form.</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  8. Applicable law and place of jurisdiction
+                </button>
+                        </h2>
+                        <div class="plus"></div>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            Some text in Applicable law and place of jurisdiction.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="footer">
+        <footer>
+            <img src="./img/logo_footer.png" />
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Inventory</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Financing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacts</a>
+                </li>
+            </ul>
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><img src="./img/facebook.png" /></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><img src="./img/instagram.png" /></a>
+                </li>
+            </ul>
+        </footer>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
