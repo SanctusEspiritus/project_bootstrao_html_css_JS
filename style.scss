@@ -9,6 +9,7 @@ $color-secondary-300: #BDBDBD;
 $color-secondary-400: #C4C4C4;
 $color-secondary-100: #AEAEAE;
 $color-primary-300: #DF4E3C;
+$color-secondary-700: #507A36;
 body {
     margin: 0;
     font-family: $font-family;
@@ -124,6 +125,44 @@ section {
         }
         &-form input::-webkit-input-placeholder {
             color: $color-primary-200;
+        }
+        &-form input:focus::-webkit-input-placeholder {
+            color: transparent;
+        }
+        .error {
+            font-size: 10px;
+            line-height: 26px;
+            font-weight: 400;
+            color: $color-primary-300;
+        }
+        .email-success {
+            border: 1px $color-secondary-700 solid;
+        }
+        .form {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+        #symbol {
+            margin-right: 20px;
+            padding-right: 15px;
+        }
+        .symbol-success::after {
+            content: "✓";
+            width: 9px;
+            height: 9px;
+            color: $color-secondary-700;
+            margin-left: -45px;
+        }
+        .symbol-error::after {
+            content: "✖";
+            width: 9px;
+            height: 9px;
+            color: $color-primary-300;
+            margin-left: -45px;
+        }
+        .email-error {
+            border: 1px $color-primary-300 solid;
         }
         &-form button {
             height: 54px;
@@ -269,26 +308,30 @@ section {
     }
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
 .offers {
     &-filter {
         display: block;
         padding: 0;
+        select:active,
+        select:focus,
+        select:hover {
+            outline: 1px $color-primary-300 solid;
+        }
     }
     button {
         padding: 13px 105px 13px 105px;
         border-radius: 15px;
-        border: 0;
+        border: 2px solid transparent;
         background-color: $color-primary-300;
         font-size: 15px;
         line-height: 20px;
         color: $color-primary-200;
         font-weight: 400;
+    }
+    button:hover {
+        background-color: #FFFFFF;
+        border: 2px $color-primary-300 solid;
+        color: $color-primary-300;
     }
     select {
         border-radius: 15px;
@@ -327,6 +370,24 @@ section {
             justify-content: flex-start;
             padding-bottom: 116px;
             padding-top: 20px;
+        }
+        .text-new {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 18px;
+            color: #FFFFFF;
+        }
+        .block-new {
+            background: $color-primary-100;
+            width: 66.5px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            position: absolute;
+            top: 172px;
         }
         .card {
             width: 295px;
@@ -385,10 +446,12 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row;
     &-sorted {
         display: flex;
         align-items: center;
         margin-right: 4px;
+        padding: 0;
         label {
             margin-right: 17px;
         }
@@ -430,7 +493,6 @@ section {
         position: relative;
         padding-left: 22px;
     }
-    /* Hide the browser's default checkbox */
     .container-checkbox input {
         position: absolute;
         opacity: 0;
@@ -498,6 +560,10 @@ section {
     .preview button {
         margin-bottom: 20px;
     }
+    .subscribe-block #symbol {
+        margin-right: 0;
+        padding: 0;
+    }
 }
 
 @media screen and (max-width: 1172px) {
@@ -507,6 +573,15 @@ section {
     .popular-questions-accordion {
         padding-left: 150px;
         padding-right: 150px;
+    }
+    .subscribe-block .form {
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (max-width: 325px) {
+    .offers .offers-cards .block-new {
+        top: 166px;
     }
 }
 
@@ -526,6 +601,11 @@ section {
     .offers-sub-filters {
         display: flex;
         justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+    }
+    .offers-sub-filters-sorted {
+        padding-top: 10px;
     }
 }
 

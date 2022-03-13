@@ -92,7 +92,8 @@ const cards = [{
         price: "18,620",
         newCar: false,
         invaliable: false,
-        date: 7
+        date: 7,
+        sold: true
     },
     {
         year: 2016,
@@ -284,6 +285,7 @@ const showCarsInAvailable = (checked) => {
                 return objEl;
             }
         });
+        setDefaultValues(checked)
     }
     createCards(newArray);
 };
@@ -316,7 +318,13 @@ const createCards = (arrayCars) => {
         const transmissionCard = document.createElement("span");
         const styleEngineCard = document.createElement("span");
         const priceCard = document.createElement("div");
+        const divNew = document.createElement("div");
+        const textNew = document.createElement("span");
 
+        if (el.newCar) {
+            divNew.className = "block-new";
+            textNew.className = "text-new";
+        }
         blockCard.className = "card";
         blockBodyCard.className = "card-body";
         yearCard.className = "card-year";
@@ -324,7 +332,13 @@ const createCards = (arrayCars) => {
         cardDetail.className = "card-detail";
         priceCard.className = "card-price";
 
-        imgCard.src = el.img;
+        textNew.innerHTML = "New";
+        if (el.sold) {
+            blockCard.style.opacity = 0.7;
+            imgCard.src = "./img/cars/sold_venza.jpg";
+        } else {
+            imgCard.src = el.img;
+        }
         yearCard.innerHTML = el.year;
         nameCard.innerHTML = el.nameCar;
         let km = "" + el.mileage;
@@ -333,6 +347,10 @@ const createCards = (arrayCars) => {
         transmissionCard.innerHTML = el.transmission;
         styleEngineCard.innerHTML = el.engine;
         priceCard.innerHTML = `$${el.price}`;
+
+        if (el.newCar) {
+            divNew.appendChild(textNew);
+        }
 
         cardDetail.appendChild(kmCard);
         cardDetail.appendChild(transmissionCard);
@@ -343,6 +361,7 @@ const createCards = (arrayCars) => {
         blockBodyCard.appendChild(cardDetail);
         blockBodyCard.appendChild(priceCard);
 
+        blockCard.appendChild(divNew);
         blockCard.appendChild(imgCard);
         blockCard.appendChild(blockBodyCard);
 
@@ -372,10 +391,12 @@ const reverseList = (src) => {
     createCards(newArray);
 };
 
-const setDefaultValues = () => {
+const setDefaultValues = (checked) => {
     preventDefaultOptionValues();
     setDefaultValuesSort();
-    checkBox.checked = false;
+    if (!checked) {
+        checkBox.checked = false;
+    }
     imgEl.src = "./img/group_arrow_up.png";
     optionsSort.value = "";
     allSelect.forEach((el) => {
@@ -625,3 +646,35 @@ function setClassShow(element, newClass) {
         $(element).addClass(newClass);
 }
 // end click on spoiler
+
+
+// * validation e-mail * //
+$(function() {
+    $(".btn-outline-secondary").on("click", validate);
+
+    function validateEmail(email) {
+        const res = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+        return res.test(String(email).toLowerCase());
+    }
+
+    function validate() {
+        const email = $(".email");
+        const divEmail = $("#symbol");
+        const $error = $(".error");
+        const elMail = email[0];
+        const elDiv = divEmail[0];
+
+        $error.text("Incorrect email");
+
+        if (validateEmail(email.val())) {
+            $error.fadeOut();
+            elMail.className = "email email-success";
+            elDiv.className = "symbol-success";
+        } else {
+            $error.fadeIn();
+            elMail.className = "email email-error";
+            elDiv.className = "symbol-error";
+        }
+    }
+});
+// * validation e-mail * //
