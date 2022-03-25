@@ -1,0 +1,33 @@
+@import "variables";
+@import "mixin_breakpoints";
+body {
+    margin: 0;
+    font-family: $font-family;
+}
+
+header {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    @include breakpoint(smxs) {
+        flex-direction: column;
+        padding: 20px;
+    }
+}
+
+header nav {
+    font-size: 15px;
+    line-height: 20.43px;
+    font-weight: 500;
+}
+
+section {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1240px;
+}

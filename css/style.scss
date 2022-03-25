@@ -1,34 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Noto+Sans:regular,italic,700,700italic);
-@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
-$font-family: "Noto Sans";
-$font-sub-text: "Poppins";
-$color-primary-100: #000000;
-$color-primary-200: #f8f8f8;
-$color-secondary-200: #8D8D8D;
-$color-secondary-300: #BDBDBD;
-$color-secondary-400: #C4C4C4;
-$color-secondary-100: #AEAEAE;
-$color-primary-300: #DF4E3C;
-$color-secondary-700: #507A36;
-body {
-    margin: 0;
-    font-family: $font-family;
-}
-
-header {
-    height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-}
-
-header nav {
-    font-size: 15px;
-    line-height: 20.43px;
-    font-weight: 500;
-}
-
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans:regular,italic,700);
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,200,300,regular,italic,500,600,700);
+@import "variables";
+@import "mixin_breakpoints";
 .nav-link {
     color: $color-primary-200;
 }
@@ -37,13 +10,16 @@ header nav {
     color: $color-primary-200;
 }
 
-section {
-    max-width: 1440px;
-    margin: 0 auto;
+.justify-content-end {
+    @include breakpoint(smxs) {
+        flex-direction: column;
+        padding: 20px;
+        align-items: center;
+    }
 }
 
 .preview {
-    background-image: url(./img/main_page_photo.jpg);
+    background-image: url(../img/main_page_photo.jpg);
     min-height: 688px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -55,6 +31,9 @@ section {
         font-size: 50px;
         line-height: 68px;
         margin-top: 136px;
+        @include breakpoint(smxs) {
+            margin-top: 206px;
+        }
     }
     &-text {
         display: flex;
@@ -75,6 +54,9 @@ section {
         font-size: 20px;
         line-height: 27px;
         margin-bottom: 0px;
+        @include breakpoint(smxs) {
+            margin-bottom: 20px;
+        }
     }
     button:hover {
         background: $color-primary-200;
@@ -97,6 +79,9 @@ section {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @include breakpoint(sm) {
+            flex-direction: column;
+        }
         &-text h4 {
             font-size: 25px;
             line-height: 34px;
@@ -122,6 +107,13 @@ section {
             line-height: 20px;
             margin-right: 20px;
             margin-bottom: 0px;
+            @include breakpoint(sm) {
+                width: 305px;
+                margin-right: 0px;
+            }
+            @include breakpoint(md) {
+                margin-bottom: 20px;
+            }
         }
         &-form input::-webkit-input-placeholder {
             color: $color-primary-200;
@@ -142,10 +134,17 @@ section {
             display: flex;
             flex-wrap: nowrap;
             justify-content: center;
+            @include breakpoint(md) {
+                flex-wrap: wrap;
+            }
         }
         #symbol {
             margin-right: 20px;
             padding-right: 15px;
+            @include breakpoint(smxs) {
+                margin-right: 0;
+                padding: 0;
+            }
         }
         .symbol-success::after {
             content: "✓";
@@ -182,6 +181,13 @@ section {
         &-form {
             display: block;
             margin-top: 0px;
+            @include breakpoint(sm) {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin-top: 20px;
+            }
         }
     }
 }
@@ -201,11 +207,22 @@ section {
             color: $color-secondary-100;
             text-transform: uppercase;
             text-align: left;
+            @include breakpoint(sm) {
+                text-align: center;
+            }
         }
     }
     &-accordion {
         padding-left: 310px;
         padding-right: 310px;
+        @include breakpoint(md) {
+            padding-left: 150px;
+            padding-right: 150px;
+        }
+        @include breakpoint(sm) {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
         .card {
             border-radius: 0px;
             border: 0;
@@ -275,6 +292,9 @@ section {
         .show {
             background: #FFFFFF;
             padding: 12px 39px 24px 39px;
+            @include breakpoint(sm) {
+                padding: 12px 19px 24px 19px;
+            }
         }
         .btn {
             padding: 0;
@@ -305,6 +325,17 @@ section {
         padding-right: 104px;
         flex-direction: row;
         font-weight: 600;
+        @include breakpoint(sm) {
+            padding-left: 0;
+            padding-right: 0;
+            flex-direction: column;
+        }
+        img,
+        ul {
+            @include breakpoint(sm) {
+                padding-top: 10px;
+            }
+        }
     }
 }
 
@@ -312,10 +343,21 @@ section {
     &-filter {
         display: block;
         padding: 0;
+        @include breakpoint(lg) {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
         select:active,
         select:focus,
         select:hover {
             outline: 1px $color-primary-300 solid;
+        }
+        select {
+            margin: 0px;
+            @include breakpoint(lg) {
+                margin: 5px;
+            }
         }
     }
     button {
@@ -370,6 +412,10 @@ section {
             justify-content: flex-start;
             padding-bottom: 116px;
             padding-top: 20px;
+            @include breakpoint(lg) {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
         .text-new {
             font-size: 12px;
@@ -447,11 +493,20 @@ section {
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+    @include breakpoint(lg) {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+    }
     &-sorted {
         display: flex;
         align-items: center;
         margin-right: 4px;
         padding: 0;
+        @include breakpoint(lg) {
+            padding-top: 10px;
+        }
         label {
             margin-right: 17px;
         }
@@ -542,106 +597,4 @@ section {
     &-instant {
         display: flex;
     }
-}
-
-@media screen and (max-width: 380px) {
-    header {
-        flex-direction: column;
-        padding: 20px;
-    }
-    .justify-content-end {
-        flex-direction: column;
-        padding: 20px;
-        align-items: center
-    }
-    .preview h1 {
-        margin-top: 206px;
-    }
-    .preview button {
-        margin-bottom: 20px;
-    }
-    .subscribe-block #symbol {
-        margin-right: 0;
-        padding: 0;
-    }
-}
-
-@media screen and (max-width: 1172px) {
-    .subscribe-block-form input {
-        margin-bottom: 20px;
-    }
-    .popular-questions-accordion {
-        padding-left: 150px;
-        padding-right: 150px;
-    }
-    .subscribe-block .form {
-        flex-wrap: wrap;
-    }
-}
-
-@media screen and (max-width: 325px) {
-    .offers .offers-cards .block-new {
-        top: 166px;
-    }
-}
-
-@media screen and (max-width: 1238px) {
-    .offers .offers-cards #cards {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .offers-filter {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        select {
-            margin: 5px;
-        }
-    }
-    .offers-sub-filters {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        padding: 10px;
-    }
-    .offers-sub-filters-sorted {
-        padding-top: 10px;
-    }
-}
-
-@media screen and (max-width: 739px) {
-    .subscribe-block {
-        flex-direction: column;
-    }
-    .subscribe-block-form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        margin-top: 20px;
-        input {
-            width: 305px;
-            margin-right: 0px;
-        }
-    }
-    .popular-questions-accordion {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
-    .popular-questions-title h2 {
-        text-align: center;
-    }
-    .footer footer {
-        padding-left: 0;
-        padding-right: 0;
-        flex-direction: column;
-    }
-    .footer footer img,
-    .footer footer ul {
-        padding-top: 10px;
-    }
-}
-
-.container {
-    max-width: 1240px;
 }

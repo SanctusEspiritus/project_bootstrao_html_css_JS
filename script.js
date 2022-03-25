@@ -11,7 +11,6 @@ const showCarsInAvailable = (checked) => {
     }
     createCards(newArray);
 };
-
 const optionValues = {
     year: 0,
     make: "",
@@ -26,7 +25,6 @@ const optionValues = {
     ascendingPerformance: "",
     descendingPerformance: "",
 };
-
 const createCards = (arrayCars) => {
         rootElementCards.innerHTML = "";
         arrayCars.map((el) => {
@@ -58,28 +56,27 @@ const createCards = (arrayCars) => {
         $(rootElementCards).append($(cardHTML));
     });
 };
-
 const showAllCars = (buttonClick = false) => {
     buttonClick && setDefaultValues();
     rootElementCards.innerHTML = "";
     createCards(cards);
 };
-
 const reverseList = (src) => {
+
     checkBox.checked = false;
+
     if (!newArray) {
         newArray = JSON.parse(JSON.stringify(cards));
     }
-    if (src.includes("group_arrow_up")) {
-        imgEl.src = "./img/group_arrow_down.png";
-    }
-    if (src.includes("group_arrow_down")) {
+
+    src.includes("group_arrow_up") ?
+        imgEl.src = "./img/group_arrow_down.png" :
         imgEl.src = "./img/group_arrow_up.png";
-    }
+
     newArray.reverse();
     createCards(newArray);
-};
 
+};
 const setDefaultValues = (checked) => {
     preventDefaultOptionValues();
     setDefaultValuesSort();
@@ -301,14 +298,14 @@ $(function() {
         const lastElement = this.lastElementChild;
         setClassShow(lastElement, "show");
         setClassShow(this, "open-issue");
+
+        function setClassShow(element, newClass) {
+            element.classList.contains(newClass) ?
+                $(element).removeClass(newClass) :
+                $(element).addClass(newClass);
+        }
     });
 });
-
-function setClassShow(element, newClass) {
-    element.classList.contains(newClass) ?
-        $(element).removeClass(newClass) :
-        $(element).addClass(newClass);
-}
 // end click on spoiler
 
 // * validation e-mail * //
